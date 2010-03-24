@@ -12,10 +12,6 @@ class Server
     get("/queues/root/#{requested_attributes.join('/')}")["queues"]
   end
 
-  def bindings
-    get("/bindings")["bindings"]
-  end
-
   def control
     get("/control")
   end
@@ -27,10 +23,6 @@ class Server
        puts "Please create the config.yml file in the config directory"
        exit 1
      end
-  end
-
-  def exchanges
-    get("/exchanges")["exchanges"]
   end
 
   def configuration
