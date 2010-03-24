@@ -37,20 +37,10 @@ module Humpty
       haml :queues
     end
 
-    get '/bindings' do
-      @bindings = @server.bindings
-      haml :bindings
-    end
-
     get '/config' do
       @queues = @server.queues
       @config = queue_config[@server.id] || {}
       haml :config
-    end
-
-    get '/queues/:name/delete' do
-      carrot.queue(params[:name]).delete
-      redirect '/'
     end
 
     post '/config' do
@@ -59,11 +49,6 @@ module Humpty
         file.puts queue_config.to_yaml
       end
       redirect '/config'
-    end
-
-    get '/exchanges/?' do
-      @exchanges = @server.exchanges.reject {|e| e["name"].blank? }
-      haml :exchanges
     end
 
     def carrot
